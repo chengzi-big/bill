@@ -99,11 +99,26 @@
       "id": 21
     },
     {
-      "type": "income",
-      "money": 10000,
+      "type": "pay",
+      "money": -10,
       "date": "2025-06-28T16:00:00.000Z",
       "useFor": "salary",
-      "id": 21
+      "id": 22
+    },
+    {
+      "type": "income",
+      "money": 10000,
+      "date": "2025-06-18T16:00:00.000Z",
+      "useFor": "salary",
+      "id": 23
+    },
+    {
+      "type": "pay",
+      "money": -1000,
+      "date": "2025-06-24T16:00:00.000Z",
+      "useFor": "salary",
+      "id": 24
     }
+
   ]
 }

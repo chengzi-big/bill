@@ -5,6 +5,7 @@ import classNames from "classnames";
 import dayjs from "dayjs";
 import { useSelector } from "react-redux";
 import _ from "lodash";
+import DailyBill from "./components/DayBill";
 
 const Month = () => {
   // 按月做数据的分组
@@ -13,7 +14,7 @@ const Month = () => {
     // return 出去计算出去的值,返回值是一个对象
     return _.groupBy(billList, (item) => dayjs(item.date).format("YYYY-MM"));
   }, [billList]);
-  console.log(monthGroup);
+  //   console.log(monthGroup);
 
   // 控制弹窗的打开和关闭
   const [dateVisible, setDateVisible] = useState(false);
@@ -49,6 +50,21 @@ const Month = () => {
     setMonthList(monthGroup[formatDate]);
     setCurrentDate(formatDate);
   };
+
+  //   当前月按照日进行分组
+  const DayGroup = useMemo(() => {
+    // return 出去计算出去的值,返回值是一个对象
+    const groupData = _.groupBy(currentMonthList, (item) =>
+      dayjs(item.date).format("YYYY-MM-DD")
+    );
+    const keys = Object.keys(groupData);
+    return {
+      groupData,
+      keys,
+    };
+  }, [currentMonthList]);
+  console.log(DayGroup);
+
   return (
     <div className="monthlyBill">
       <NavBar className="nav" backArrow={false}>
@@ -91,6 +107,16 @@ const Month = () => {
             max={new Date()}
           />
         </div>
+        {/* 单日列表统计 */}
+        {DayGroup.keys.map((key) => {
+          return (
+            <DailyBill
+              key={key}
+              date={key}
+              billList={DayGroup.groupData[key]}
+            ></DailyBill>
+          );
+        })}
       </div>
     </div>
   );
