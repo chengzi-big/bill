@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { addBillList } from "@/store/modules/billStore";
 import { useDispatch } from "react-redux";
+import dayjs from "dayjs";
 
 const New = () => {
   const navigate = useNavigate();
@@ -27,11 +28,22 @@ const New = () => {
     const data = {
       type: billType,
       money: billType === "pay" ? -money : money,
-      date: new Date(),
+      date: date,
       useFor: useFor,
     };
     dispatch(addBillList(data));
     setMoney(0);
+  };
+  // 存储选择的时间
+  const [date, setDate] = useState();
+  // 控制时间选择器打开和关闭
+  const [dateVisible, setDateVisible] = useState(false);
+  // 确认选择时间
+  const dateConfirm = (value) => {
+    // console.log(value);
+    // console.log(new Date());
+    setDate(value);
+    setDateVisible(false);
   };
   return (
     <div className="keepAccounts">
@@ -61,11 +73,16 @@ const New = () => {
           <div className="kaForm">
             <div className="date">
               <Icon type="calendar" className="icon" />
-              <span className="text">{"今天"}</span>
+              <span className="text" onClick={() => setDateVisible(true)}>
+                {dayjs(date).format("YYYY-MM-DD")}
+              </span>
+              {/* 时间选择器 */}
               <DatePicker
                 className="kaDate"
                 title="记账日期"
                 max={new Date()}
+                visible={dateVisible}
+                onConfirm={dateConfirm}
               />
             </div>
             <div className="kaInput">
