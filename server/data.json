@@ -118,7 +118,27 @@
       "date": "2025-06-24T16:00:00.000Z",
       "useFor": "salary",
       "id": 24
+    },
+    {
+      "id": "9a6a",
+      "type": "income",
+      "money": "20000",
+      "date": "2025-06-25T03:02:51.665Z",
+      "useFor": "salary"
+    },
+    {
+      "id": "5289",
+      "type": "pay",
+      "money": -5,
+      "date": "2025-06-25T03:09:55.296Z",
+      "useFor": "drinks"
+    },
+    {
+      "id": "eb04",
+      "type": "pay",
+      "money": -10,
+      "date": "2025-06-25T03:14:20.116Z",
+      "useFor": "taxi"
     }
-
   ]
 }
